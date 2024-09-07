@@ -1,12 +1,14 @@
 const express = require('express');
-const path = require('path');  // To help with the file path
+const path = require('path');
+var favicon = require('serve-favicon')
+
 
 const app = express();
 
-// Serve static files from the "public" directory
 app.use(express.static('public'));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
-// Route to serve the index.html file
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
