@@ -11,7 +11,7 @@ sendBtn.onclick = () => {
     console.log('Debug: entered Number:',num)
     if(num == number){
         if(tries === 1){
-            status.innerText='You got it right, you needed ' + tries + ' try'    
+            status.innerText='You got it right, you needed ' + tries + ' try'
         }else{
             status.innerText='You got it right, you needed ' + tries + ' tries'
         }
@@ -31,8 +31,11 @@ function enableReset(){
     rsBtn.onclick = () => {
         tries = 1
         status.innerText='';
+        console.clear()
+        rsBtn.hidden = true;
         document.getElementById("num").value = ''
         document.getElementById("num").disabled = false;
         number = Math.floor(Math.random() * 11);
+        console.log('Debug: generated Number:', number)
     }
 }
