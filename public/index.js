@@ -1,6 +1,5 @@
 const sendBtn = document.getElementById('sendBtn');
 const status = document.getElementById('status');
-const input = document.getElementById("num");
 
 let number = Math.floor(Math.random() * 11);
 let triedNumbers = [];
@@ -8,7 +7,7 @@ let tries = 1;
 console.log('Debug: generated Number:', number)
 
 
-input.addEventListener("keypress", function(event) {
+document.addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
     event.preventDefault();
     document.getElementById("sendBtn").click();
@@ -18,9 +17,17 @@ input.addEventListener("keypress", function(event) {
 sendBtn.onclick = () => {
     const num = document.getElementById("num").value;
     console.log('Debug: entered Number:',num)
-    if(!num > 10 && !num < 0){
+    if(num > 10 && num < 0){
+      if (num < 0) {
+        status.innerText = 'Your guess must be greater or equal to 0'
+        console.log('Number is smaller than 0')
+      }else if(num > 10){
+        status.innerText = 'Your guess must be smaller or equal to 10'
+        console.log('Number is greater than 10')
+      }
+    }else{
       if(triedNumbers.includes(num)){
-        status.innerText='You already tried that number, your tries did not go up'
+        status.innerText='You already tried that number, the counter did not go up'
       }else{
         if(num == number){
             if(tries === 1){
@@ -29,9 +36,9 @@ sendBtn.onclick = () => {
                 status.innerText='You got it right, you needed ' + tries + ' tries'
             }
             document.getElementById("num").disabled = true;
-          enableReset();
+            enableReset()
         }else{
-            triedNumbers.push(num)
+          triedNumbers.push(num)
             if(num > number){
                 status.innerText='The searched number is smaller then your entered number'
             }else{
@@ -40,18 +47,11 @@ sendBtn.onclick = () => {
             tries++;
         }
       }
-    }else{
-      if (num < 0) {
-        status.innerText = 'Your guess must be greater or equal to 0'
-        console.log('Number is smaller than 0')
-      }else if(num > 10){
-        status.innerText = 'Your guess must be smaller or equal to 10'
-        console.log('Number is greater than 10')
-      }
     }
 
 }
 function enableReset(){
+  document.getElementById('sendBtn').hidden = true;
     document.getElementById('rsBtn').hidden=false;
     setTimeout(500)
     document.addEventListener("keypress", function(event) {
@@ -62,6 +62,7 @@ function enableReset(){
     });
     rsBtn.onclick = () => {
         tries = 1
+        triedNumbers = [];
         status.innerText='';
         console.clear()
         rsBtn.hidden = true;
