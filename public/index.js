@@ -17,22 +17,33 @@ input.addEventListener("keypress", function(event) {
 sendBtn.onclick = () => {
     const num = document.getElementById("num").value;
     console.log('Debug: entered Number:',num)
-    if(num == number){
-        if(tries === 1){
-            status.innerText='You got it right, you needed ' + tries + ' try'
-        }else{
-            status.innerText='You got it right, you needed ' + tries + ' tries'
-        }
-        document.getElementById("num").disabled = true;
-        enableReset()
+    if(!num > 10 && !num < 0){
+      if(num == number){
+          if(tries === 1){
+              status.innerText='You got it right, you needed ' + tries + ' try'
+          }else{
+              status.innerText='You got it right, you needed ' + tries + ' tries'
+          }
+          document.getElementById("num").disabled = true;
+          enableReset()
+      }else{
+          if(num > number){
+              status.innerText='The searched number is smaller then your entered number'
+          }else{
+              status.innerText='The searched number is greater than your entered number'
+          }
+          tries++;
+      }
     }else{
-        if(num > number){
-            status.innerText='The searched number is smaller then your entered number'
-        }else{
-            status.innerText='The searched number is greater than your entered number'
-        }
-        tries++;
+      if (num < 0) {
+        status.innerText = 'Your guess must be greater or equal to 0'
+        console.log('Number is smaller than 0')
+      }else if(num > 10){
+        status.innerText = 'Your guess must be smaller or equal to 10'
+        console.log('Number is greater than 10')
+      }
     }
+
 }
 function enableReset(){
     document.getElementById('rsBtn').hidden=false;
