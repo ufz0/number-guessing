@@ -3,6 +3,7 @@ const status = document.getElementById('status');
 const input = document.getElementById("num");
 
 let number = Math.floor(Math.random() * 11);
+let triedNumbers = [];
 let tries = 1;
 console.log('Debug: generated Number:', number)
 
@@ -18,21 +19,26 @@ sendBtn.onclick = () => {
     const num = document.getElementById("num").value;
     console.log('Debug: entered Number:',num)
     if(!num > 10 && !num < 0){
-      if(num == number){
-          if(tries === 1){
-              status.innerText='You got it right, you needed ' + tries + ' try'
-          }else{
-              status.innerText='You got it right, you needed ' + tries + ' tries'
-          }
-          document.getElementById("num").disabled = true;
-          enableReset()
+      if(triedNumbers.includes(num)){
+        status.innerText='You already tried that number, your tries did not go up'
       }else{
-          if(num > number){
-              status.innerText='The searched number is smaller then your entered number'
-          }else{
-              status.innerText='The searched number is greater than your entered number'
-          }
-          tries++;
+        if(num == number){
+            if(tries === 1){
+                status.innerText='You got it right, you needed ' + tries + ' try'
+            }else{
+                status.innerText='You got it right, you needed ' + tries + ' tries'
+            }
+            document.getElementById("num").disabled = true;
+          enableReset();
+        }else{
+            triedNumbers.push(num)
+            if(num > number){
+                status.innerText='The searched number is smaller then your entered number'
+            }else{
+                status.innerText='The searched number is greater than your entered number'
+            }
+            tries++;
+        }
       }
     }else{
       if (num < 0) {
