@@ -20,24 +20,27 @@ document.addEventListener("keypress", function(event) {
 
 sendBtn.onclick = () => {
     const num = document.getElementById("num").value;
+    if(num.length === 0){
+      console.log('Input is empty')
+    }else{
     console.log('Debug: entered Number:',num)
-    if(num > 10 && num < 0){
+    }
+    if(num > 10 || num < 0){
       if (num < 0) {
         status.innerText = 'Your guess must be greater or equal to 0'
       }else if(num > 10){
         status.innerText = 'Your guess must be smaller or equal to 10'
       }
     }else{
+      if(document.getElementById("num").value.length === 0){
+        status.innerText = 'You have to enter something'
+      }else{
       if(triedNumbers.includes(num)){
         status.innerText='You already tried that number, the counter did not go up'
       }else{
         triedNumbersText.hidden = false;
-        if(numbersList.innerText.length > 0){
-          numbersList.innerText = numbersList.innerText + ', ' +  num
-        }else{
-        numbersList.innerText = numbersList.innerText + num
-        }
-
+        triedNumbers.push(num)
+        numbersList.innerText = triedNumbers.sort()
         if(num == number){
             if(tries === 1){
                 status.innerText='You got it right, you needed ' + tries + ' try'
@@ -47,7 +50,7 @@ sendBtn.onclick = () => {
             document.getElementById("num").disabled = true;
             enableReset()
         }else{
-          triedNumbers.push(num)
+
             if(num > number){
                 status.innerText='The searched number is smaller then your entered number'
             }else{
@@ -55,6 +58,7 @@ sendBtn.onclick = () => {
             }
             tries++;
         }
+      }
       }
     }
 
