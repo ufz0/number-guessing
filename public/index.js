@@ -39,12 +39,8 @@ sendBtn.onclick = () => {
         status.innerText='You already tried that number, the counter did not go up'
       }else{
         triedNumbersText.hidden = false;
-        if(numbersList.innerText.length > 0){
-          numbersList.innerText = numbersList.innerText + ', ' +  num
-        }else{
-        numbersList.innerText = numbersList.innerText + num
-        }
-
+        triedNumbers.push(num)
+        numbersList.innerText = triedNumbers.sort()
         if(num == number){
             if(tries === 1){
                 status.innerText='You got it right, you needed ' + tries + ' try'
@@ -54,7 +50,7 @@ sendBtn.onclick = () => {
             document.getElementById("num").disabled = true;
             enableReset()
         }else{
-          triedNumbers.push(num)
+
             if(num > number){
                 status.innerText='The searched number is smaller then your entered number'
             }else{
