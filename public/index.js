@@ -20,14 +20,21 @@ document.addEventListener("keypress", function(event) {
 
 sendBtn.onclick = () => {
     const num = document.getElementById("num").value;
+    if(num.length === 0){
+      console.log('Input is empty')
+    }else{
     console.log('Debug: entered Number:',num)
-    if(num > 10 && num < 0){
+    }
+    if(num > 10 || num < 0){
       if (num < 0) {
         status.innerText = 'Your guess must be greater or equal to 0'
       }else if(num > 10){
         status.innerText = 'Your guess must be smaller or equal to 10'
       }
     }else{
+      if(document.getElementById("num").value.length === 0){
+        status.innerText = 'You have to enter something'
+      }else{
       if(triedNumbers.includes(num)){
         status.innerText='You already tried that number, the counter did not go up'
       }else{
@@ -55,6 +62,7 @@ sendBtn.onclick = () => {
             }
             tries++;
         }
+      }
       }
     }
 
