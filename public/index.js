@@ -20,10 +20,8 @@ sendBtn.onclick = () => {
     if(num > 10 && num < 0){
       if (num < 0) {
         status.innerText = 'Your guess must be greater or equal to 0'
-        console.log('Number is smaller than 0')
       }else if(num > 10){
         status.innerText = 'Your guess must be smaller or equal to 10'
-        console.log('Number is greater than 10')
       }
     }else{
       if(triedNumbers.includes(num)){
