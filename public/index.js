@@ -1,10 +1,14 @@
 const sendBtn = document.getElementById('sendBtn');
 const status = document.getElementById('status');
 
+const numbersList = document.getElementById('numbersList');
+const triedNumbersText = document.getElementById('triedNumbersText')
+
 let number = Math.floor(Math.random() * 11);
 let triedNumbers = [];
 let tries = 1;
 console.log('Debug: generated Number:', number)
+
 
 
 document.addEventListener("keypress", function(event) {
@@ -27,6 +31,13 @@ sendBtn.onclick = () => {
       if(triedNumbers.includes(num)){
         status.innerText='You already tried that number, the counter did not go up'
       }else{
+        triedNumbersText.hidden = false;
+        if(numbersList.innerText.length > 0){
+          numbersList.innerText = numbersList.innerText + ', ' +  num
+        }else{
+        numbersList.innerText = numbersList.innerText + num
+        }
+
         if(num == number){
             if(tries === 1){
                 status.innerText='You got it right, you needed ' + tries + ' try'
@@ -63,6 +74,8 @@ function enableReset(){
         tries = 1
         triedNumbers = [];
         status.innerText='';
+      numbersList.innerText = '';
+      triedNumbersText.hidden = true;
         console.clear()
         rsBtn.hidden = true;
         document.getElementById("num").value = ''
