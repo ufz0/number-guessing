@@ -1,10 +1,18 @@
 const sendBtn = document.getElementById('sendBtn');
 const status = document.getElementById('status');
-
+const input = document.getElementById("num");
 
 let number = Math.floor(Math.random() * 11);
 let tries = 1;
 console.log('Debug: generated Number:', number)
+
+
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("sendBtn").click();
+  }
+});
 
 sendBtn.onclick = () => {
     const num = document.getElementById("num").value;
@@ -28,6 +36,13 @@ sendBtn.onclick = () => {
 }
 function enableReset(){
     document.getElementById('rsBtn').hidden=false;
+    setTimeout(500)
+    document.addEventListener("keypress", function(event) {
+      if (event.key === "r") {
+        event.preventDefault();
+        document.getElementById("rsBtn").click();
+      }
+    });
     rsBtn.onclick = () => {
         tries = 1
         status.innerText='';
