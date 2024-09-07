@@ -59,6 +59,7 @@ function enableReset(){
       }
     });
     rsBtn.onclick = () => {
+      sendBtn.hidden = false;
         tries = 1
         triedNumbers = [];
         status.innerText='';
