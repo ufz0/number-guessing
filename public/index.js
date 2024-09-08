@@ -25,6 +25,7 @@ sendBtn.onclick = () => {
     }else{
     console.log('Debug: entered Number:',num)
     }
+
     if(num > 10 || num < 0){
       if (num < 0) {
         status.innerText = 'Your guess must be greater or equal to 0'
@@ -35,6 +36,7 @@ sendBtn.onclick = () => {
       if(document.getElementById("num").value.length === 0){
         status.innerText = 'You have to enter something'
       }else{
+        document.getElementById("num").value = '';
       if(triedNumbers.includes(num)){
         status.innerText='You already tried that number, the counter did not go up'
       }else{
