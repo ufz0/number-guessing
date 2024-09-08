@@ -42,7 +42,9 @@ sendBtn.onclick = () => {
       }else{
         triedNumbersText.hidden = false;
         triedNumbers.push(num)
-        numbersList.innerText = triedNumbers.sort()
+        numbersList.innerText = triedNumbers.sort(function(a, b) {
+          return a - b;
+        });
         if(num == number){
             if(tries === 1){
                 status.innerText='You got it right, you needed ' + tries + ' try'
